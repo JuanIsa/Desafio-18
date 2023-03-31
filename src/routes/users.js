@@ -54,7 +54,8 @@ usersRoute.post('/login', passport.authenticate('login', { session: false }), as
         completeName: req.user.completeName,
         role: req.user.role,
         id: req.user._id,
-        userImg: req.user.userImg
+        userImg: req.user.userImg,
+        email:req.user.email
     };
     const token = jwt.sign(userToken, process.env.JWT_SECRET, { expiresIn: '1d' });
     res.cookie(process.env.JWT_COOKIE, token).send({ status: 0, message: 'Sesión iniciada con éxito.' });

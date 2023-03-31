@@ -5,11 +5,13 @@ import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
-//Módulos interntos
-import initializePassport from './services/passport.config.js';
-import addLogger from './middlewares/logger.js';
+//Routes
 import usersRoute from './routes/users.js';
 import productsRoute from './routes/products.js';
+import cartRoute from './routes/cart.js';
+//Servicios
+import initializePassport from './services/passport.config.js';
+import addLogger from './middlewares/logger.js';
 import mongoConnect from './services/mongoConnection.js';
 
 mongoConnect();
@@ -31,10 +33,12 @@ app.use('/', express.static(__dirname + '/public'));
 app.use('/auth/login', express.static(__dirname + '/public'));
 app.use('/auth/register', express.static(__dirname + '/public'));
 app.use('/home', express.static(__dirname + '/public'));
+app.use('/home/carrito', express.static(__dirname + '/public'));
 
 //ROUTES
 app.use('/users', usersRoute);
 app.use('/products', productsRoute);
+app.use('/cart', cartRoute);
 
 //RUTA 404
 app.use('*', (req, res) => {
