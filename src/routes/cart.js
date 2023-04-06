@@ -1,14 +1,14 @@
 'use strict';
 import { Router } from 'express';
-import Cart from '../mongodb/handlerCart.js';
+import { cartPost, cartGet, cartPut } from '../controllers/cart.controller.js';
 
 const cartRoute = Router();
-const instanceOfCart = new Cart();
 
+//CARGAR UN PRODUCTO EN EL CARRITO DE UN USUARIO
+cartRoute.post('/:email', cartPost);
+//OBTENER EL CARRITO DE UN USUARIO
+cartRoute.get('/:email', cartGet);
+//BORRAR UN PRODUCTO DEL CARRITO
+cartRoute.put('/:email', cartPut);
 
-cartRoute.post('/:email', (req, res) => {
-    instanceOfCart.addProductToCart(req.params.email, req.body)
-        .then(info => res.send({ info }))
-        .catch(error => res.send({ error }))
-});
 export default cartRoute;

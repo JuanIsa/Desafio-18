@@ -11,6 +11,10 @@ const schema = new mongoose.Schema({
         type: String,
         require: false
     },
+    category: {
+        type: String,
+        require: false
+    },
     code: {
         type: Number,
         require: true,

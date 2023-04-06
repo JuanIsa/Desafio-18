@@ -33,7 +33,7 @@ app.use('/', express.static(__dirname + '/public'));
 app.use('/auth/login', express.static(__dirname + '/public'));
 app.use('/auth/register', express.static(__dirname + '/public'));
 app.use('/home', express.static(__dirname + '/public'));
-app.use('/home/carrito', express.static(__dirname + '/public'));
+app.use('/home/cart', express.static(__dirname + '/public'));
 
 //ROUTES
 app.use('/users', usersRoute);

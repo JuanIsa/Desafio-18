@@ -17,6 +17,7 @@ class Products{
     }
     //INSERTAR UN PRODUCTO
     async insertProduct(product) {
+        console.log(product)
         const createData = await productsModel.create( product )
             .then(data => data)
             .catch(e => { Error: e });
