@@ -10,7 +10,7 @@ import usersRoute from './routes/users.js';
 import productsRoute from './routes/products.js';
 import cartRoute from './routes/cart.js';
 //Servicios
-import initializePassport from './services/passport.config.js';
+import {initializeLocalPassport} from './services/passport.config.js';
 import addLogger from './middlewares/logger.js';
 import mongoConnect from './services/mongoConnection.js';
 
@@ -21,7 +21,8 @@ const app = express();
 const PORT = process.env.PORT || 4300;
 
 //Midlewares
-initializePassport();
+initializeLocalPassport();
+
 app.use(cors());
 app.use(addLogger);
 app.use(cookieParser());

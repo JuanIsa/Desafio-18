@@ -1,5 +1,5 @@
 'use strict';
-import Producs from '../mongodb/handlerProducts.js'
+import Producs from '../dao/handlerProductsDAO.js'
 const instanceOfProducts = new Producs();
 
 export const productsPost = (req, res) => {
@@ -16,8 +16,8 @@ export const productsPost = (req, res) => {
         .catch(e => res.send({ status: 1, message: e }));
 }
 export const productsGet = (req, res) => {
-    instanceOfProducts.readAllProducts()
-        .then(data => res.send({ status: 0, message: data }))
+    instanceOfProducts.paginateProducts(req.query.page)
+        .then(data => res.send({ status: 0, data }))
         .catch(e => res.send({ status: 1, message: e }));
 }
 export const productsDelete = (req, res) => {
@@ -29,7 +29,6 @@ export const productsDelete = (req, res) => {
         .catch(e => res.send({ status: 1, message: e }));
 
 }
-
 export const productsPut = (req, res) => {
     const code = req.params.code;
     const info = req.body;

@@ -1,12 +1,13 @@
 import passport from "passport";
 import local from 'passport-local';
-import Users from "../mongodb/handlerUsers.js";
+
+import Users from "../dao/handlerUsersDAO.js";
 import { validatePassword } from "./bcrypt.js";
 
 const instancesUser = new Users();
 const LocalStrategy = local.Strategy;
 
-const initializePassport = () => {
+export const initializeLocalPassport = () => {
     passport.use('login', new LocalStrategy({ usernameField: 'email' }, async (email, password, done) => {
         const user = await instancesUser.readUser(email);
         if (!user) return done(null, false, { status: 1, message: 'No existe el usuario.' });
@@ -15,5 +16,3 @@ const initializePassport = () => {
         return done(null, user);
     }));
 };
-
-export default initializePassport;

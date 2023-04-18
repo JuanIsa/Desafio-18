@@ -1,5 +1,5 @@
 'use strict';
-import Cart from '../mongodb/handlerCart.js';
+import Cart from '../dao/handlerCartDAO.js';
 const instanceOfCart = new Cart(); 
 
 export const cartPost = (req, res) => {

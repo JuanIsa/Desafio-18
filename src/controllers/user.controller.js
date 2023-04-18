@@ -3,8 +3,11 @@ import fs from 'fs';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 
-import Users from '../mongodb/handlerUsers.js';
+import Users from '../dao/handlerUsersDAO.js';
 import sendMail from '../services/mailer.js';
+import UserDTO from '../dao/dto/userDTO.js';
+
+const userDto= new UserDTO();
 
 dotenv.config();
 const instanceOfUsers = new Users();
@@ -37,16 +40,11 @@ export const userPostRegister = (req, res) => {
                     });
                 };
             }
-        });
+        })
+        .catch(e => console.log(e));
 }
 export const userPostLogin = async (req, res) => {
-    const userToken = {
-        completeName: req.user.completeName,
-        role: req.user.role,
-        id: req.user._id,
-        userImg: req.user.userImg,
-        email: req.user.email
-    };
+    const userToken =userDto.getTokenDTO(req.user);
     const token = jwt.sign(userToken, process.env.JWT_SECRET, { expiresIn: '1d' });
     res.cookie(process.env.JWT_COOKIE, token).send({ status: 0, message: 'Sesión iniciada con éxito.' });
 }
