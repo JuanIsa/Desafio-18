@@ -58,7 +58,17 @@ class Products {
             .catch(e => { Error: e });
         return products;
     }
-
+    //ACTUALIZAR UN PRODUCTO PARA TERMINAR COMPRA
+    async uptadteProductForBuy(code, info) {
+        const product = await productsModel.findOne({ code })
+            .then(data => {
+                data.stock -= info.cant;
+                return data;
+            })
+            .catch(e => { Error: e });
+        await product.save();
+        return product;
+    }
 }
 
 

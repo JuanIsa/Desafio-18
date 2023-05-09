@@ -44,7 +44,7 @@ const schema = new mongoose.Schema({
             code: Number,
             urlImgProduct: String,
             price:Number,
-            cant: Number
+            cant: Number,
         }]
     }
 }, { versionKey: false });

@@ -4,7 +4,7 @@ export default class UserDTO {
             completeName: user.completeName,
             role: user.role,
             userImg: user.userImg,
-            email: user.email
+            email: user.email,
         }
     }
 }
